@@ -46,7 +46,9 @@ Use grep, uniq, sed. Check that all of the species names are spelled correctly i
 I referenced [The Linux Juggernaut](https://www.linuxnix.com/sed-delete-a-matched-line-from-a-file/) for how to delete lines containing NA. I did not get to answer the last part of the question using cut, sort, and uniq, so I still need to figure that out, but for now, I found the answers using grep:
 
 50 data values for Iris setosa
+
 48 data values for Iris versicolor
+
 50 data values for Iris virginica
 
 ```
