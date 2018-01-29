@@ -43,7 +43,7 @@ For the second file, I would get the error message that no such file exists when
 ## II. Clean the data
 Use grep, uniq, sed. Check that all of the species names are spelled correctly in the file iris-data-dirty.csv. Also check for missing values stored as NA. Create a new file where mispelled names are replaced with the correct values, and lines with NA are excluded, and save it as iris-data-clean.csv. Use cut, sort and uniq to list the number of data values there are for each species in the new cleaned data file.
 
-I referenced [The Linux Juggernaut](https://www.linuxnix.com/sed-delete-a-matched-line-from-a-file/) for how to delete lines containing NA.
+I referenced [The Linux Juggernaut](https://www.linuxnix.com/sed-delete-a-matched-line-from-a-file/) for how to delete lines containing NA. I am having trouble with the last part of this question, so I going to move on and come back to it later.
 
 ```
 >cat iris-data-dirty.csv
