@@ -63,14 +63,14 @@ answer
 ## III. Summarize sequence data file
 Find how many lines in the data file test.fastq.gz start with "TGCAG" and end with "GAG"
 
-Answer to III and [link](www.google.com) for any online resources.
+I already unzipped the file test.fastq.gz, so here I am using the unzipped file test.fastq. I learned from Vijay Ramesh's message in the [gitter chatroom](https://gitter.im/programming-for-bio/Lobby) that "a . signifies the end of one set of characters and a * signifies the start of another and you need a $ after to show that it is ending with those."
 
 ```
-code
+>cat test.fastq | grep -c '^TGCAG.*GAG$'
 ```
 
 ```
-answer
+44
 ```
 
 ## IV. Summarize sequence data file
