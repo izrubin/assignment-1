@@ -1,5 +1,4 @@
-# assignment-1
-Assignment 1 due January 29
+# Assignment 1
 
 ## I. Get the data files
 Download the following data files from the internet using the curl command: http://eaton-lab.org/pdsb/test.fastq.gz and http://eaton-lab.org/pdsb/iris-data-dirty.csv. Use the less or zless commands to look at the files. Then use the head command to print the first 5 lines from each file as output.
@@ -90,11 +89,40 @@ The result is that there are 44 lines in the file that start with "TGCAG" and en
 ## IV. Summarize sequence data file
 Write a for-loop to separate the reads from the file test.fastq.gz based on the taxon name in the label, and write the reads to separately named files in the new directory called sorted_reads/. The answer to this question will require more than a single line. See the lecture materials about using variables in for-loops. This will also be tricky because each read in the data file spans four lines (this is a standard genetic sequence file format), so for each read that you correctly identify you must grab the line with the sequence data below it, as well as the repeat label after that, and the quality information line after that. For a hint, see additional options for the grep command that can be used to select multiple lines.
 
-I did not get to complete this question yet.
+I referred to `grep --help` and my notes from the second class lecture to revise my answer to this question. I began by making a sorted_reads directory. I used `grep` to select lines beginning with @ followed by a number, and used `cut` to select the first column separated by a ".", sorted the output of unique values alphabetically, and removed the @ from each line by cutting out the second byte in the output lines.
+```
+>mkdir sorted_reads
+>cat test.fastq | grep "^@[0-9]" | cut -d '.' -f 1 | sort | uniq | cut -b 2-
+ ```
+I created a variable for taxon, using the previous code, and checked the result using `echo`:
+```
+>taxon=$(cat test.fastq | grep "^@[0-9]" | cut -d '.' -f 1 | sort | uniq | cut -b 2-)
+>echo $taxon | sort
+```
+I created a for-loop to create a new file in the sorted_reads/ directory for each unique taxon name, using the `-A` option listed in `grep --help` to grab 4 lines at once (the line matching the $taxon conditions as well as the next 3 lines). Finally, I looked in the sorted_reads/ directory to see a list of the files created.
+```
+>for taxon in $taxon
+>do
+>cat test.fastq | grep @$taxon -A 4 > sorted_reads/$taxon.fastq
+>done
+>cd sorted_reads/
+>ls -lt sorted_reads/
+```
+Output:
+```
+-rw-r--r-- 1 ILANA Z 197611  25009 Feb  3 14:15 29154_superba.fastq
+-rw-r--r-- 1 ILANA Z 197611  86624 Feb  3 14:15 30556_thamno.fastq
+-rw-r--r-- 1 ILANA Z 197611  29275 Feb  3 14:15 30686_cyathophylla.fastq
+-rw-r--r-- 1 ILANA Z 197611 107684 Feb  3 14:15 32082_przewalskii.fastq
+-rw-r--r-- 1 ILANA Z 197611  21434 Feb  3 14:15 33413_thamno.fastq
+-rw-r--r-- 1 ILANA Z 197611 107422 Feb  3 14:15 33588_przewalskii.fastq
+-rw-r--r-- 1 ILANA Z 197611  85162 Feb  3 14:15 35236_rex.fastq
+-rw-r--r-- 1 ILANA Z 197611 103379 Feb  3 14:15 35855_rex.fastq
+-rw-r--r-- 1 ILANA Z 197611  48141 Feb  3 14:15 38362_rex.fastq
+-rw-r--r-- 1 ILANA Z 197611  63052 Feb  3 14:15 39618_rex.fastq
+-rw-r--r-- 1 ILANA Z 197611  53582 Feb  3 14:15 40578_rex.fastq
+-rw-r--r-- 1 ILANA Z 197611  79376 Feb  3 14:15 41478_cyathophylloides.fastq
+-rw-r--r-- 1 ILANA Z 197611  93523 Feb  3 14:15 41954_cyathophylloides.fastq
+```
 
-```
-code
-```
-```
-answer
-```
+>Written with [StackEdit](https://stackedit.io/).
